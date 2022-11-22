@@ -38,14 +38,19 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
 
 Route::group(['middleware' => ['auth', 'role:exhibitor']], function () {
+    //votes  //products //fetured categories //
     Route::get('/exhibitor/dashboard', 'App\Http\Controllers\exhibitor\DashboardController@index')->name('exhibitor-dashboard');
 
     Route::get('/exhibitor/transactions', 'App\Http\Controllers\exhibitor\TransactionController@index')->name('exhibitor-transactions');
 
     Route::get('/exhibitor/products', 'App\Http\Controllers\exhibitor\ProductController@index')->name('exhibitor-products');
+    Route::post('/exhibitor/add-product', 'App\Http\Controllers\exhibitor\ProductController@add')->name('exhibitor-add-product');
+    Route::post('/exhibitor/update-product', 'App\Http\Controllers\exhibitor\ProductController@update')->name('exhibitor-update-product');
+    Route::post('/exhibitor/add-product-pic', 'App\Http\Controllers\exhibitor\ProductController@add_pic')->name('exhibitor-add-product-pic');
 });
 
 Route::group(['middleware' => ['auth', 'role:user']], function () {
-    Route::get('/user/dashboard', 'App\Http\Controllers\user\DashboardController@index')->name('user-dashboard');
+    Route::get('/home', 'App\Http\Controllers\user\DashboardController@index')->name('user-dashboard');
+    Route::get('/products/{id}', 'App\Http\Controllers\user\DashboardController@products')->name('user-products');
 });
 require __DIR__.'/auth.php';
