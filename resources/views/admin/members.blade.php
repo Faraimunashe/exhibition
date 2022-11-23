@@ -40,9 +40,6 @@
                                     <div class="col-md-10">
                                         <h5 class="card-title">Members</h5>
                                     </div>
-                                    <div class="col-md-2 mt-3 justify-end">
-                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#largeModal">Add New</button>
-                                    </div>
                                 </div>
                                 <table class="table table-borderless datatable">
                                     <thead>

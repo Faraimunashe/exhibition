@@ -26,7 +26,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin/dashboard', 'App\Http\Controllers\admin\DashboardController@index')->name('admin-dashboard');
 
     Route::get('/admin/exhibitors', 'App\Http\Controllers\admin\ExhibitorController@index')->name('admin-exhibitors');
-    Route::get('/admin/add-exhibitor', 'App\Http\Controllers\admin\ExhibitorController@add')->name('admin-add-exhibitor');
+    Route::post('/admin/update-exhibitor', 'App\Http\Controllers\admin\ExhibitorController@add')->name('admin-update-exhibitor');
 
     Route::get('/admin/members', 'App\Http\Controllers\admin\MemberController@index')->name('admin-members');
     Route::get('/admin/update-member', 'App\Http\Controllers\admin\MemberController@update')->name('admin-update-member');
@@ -45,12 +45,17 @@ Route::group(['middleware' => ['auth', 'role:exhibitor']], function () {
 
     Route::get('/exhibitor/products', 'App\Http\Controllers\exhibitor\ProductController@index')->name('exhibitor-products');
     Route::post('/exhibitor/add-product', 'App\Http\Controllers\exhibitor\ProductController@add')->name('exhibitor-add-product');
-    Route::post('/exhibitor/update-product', 'App\Http\Controllers\exhibitor\ProductController@update')->name('exhibitor-update-product');
     Route::post('/exhibitor/add-product-pic', 'App\Http\Controllers\exhibitor\ProductController@add_pic')->name('exhibitor-add-product-pic');
+    Route::post('/exhibitor/update-product', 'App\Http\Controllers\exhibitor\ProductController@update')->name('exhibitor-update-product');
+    Route::post('/exhibitor/delete-product', 'App\Http\Controllers\exhibitor\ProductController@delete')->name('exhibitor-delete-product');
 });
 
 Route::group(['middleware' => ['auth', 'role:user']], function () {
     Route::get('/home', 'App\Http\Controllers\user\DashboardController@index')->name('user-dashboard');
     Route::get('/products/{id}', 'App\Http\Controllers\user\DashboardController@products')->name('user-products');
+
+    Route::get('/exhibit', 'App\Http\Controllers\user\ExhibitController@index')->name('user-exhibit');
+    Route::post('/apply-exhibition', 'App\Http\Controllers\user\ExhibitController@apply')->name('user-apply-exhibit');
+
 });
 require __DIR__.'/auth.php';

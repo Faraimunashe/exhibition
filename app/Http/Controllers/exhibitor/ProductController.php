@@ -21,14 +21,14 @@ class ProductController extends Controller
     public function add(Request $request)
     {
         $request->validate([
-            'category_id' => ['required', 'integer'],
+            //'category_id' => ['required', 'integer'],
             'name' => ['required', 'string'],
             'description' => ['required', 'string']
         ]);
 
         try{
             $product = new Product();
-            $product->category_id = $request->category_id;
+            $product->exhibition_id = get_exhibitor()->id;
             $product->name = $request->name;
             $product->description = $request->description;
 
@@ -38,6 +38,47 @@ class ProductController extends Controller
 
             $product->save();
             return redirect()->back()->with('success', 'successfully added product');
+        }catch(Exception $e)
+        {
+            return redirect()->back()->with('error', 'ERROR: '.$e->getMessage());
+        }
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'product_id' => ['required', 'integer'],
+            'name' => ['required', 'string'],
+            'description' => ['required', 'string']
+        ]);
+
+        try{
+            $product = Product::find($request->product_id);
+            $product->name = $request->name;
+            $product->description = $request->description;
+
+            if(isset($request->price)){
+                $product->price = $request->price;
+            }
+
+            $product->save();
+            return redirect()->back()->with('success', 'successfully updated product');
+        }catch(Exception $e)
+        {
+            return redirect()->back()->with('error', 'ERROR: '.$e->getMessage());
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'product_id' => ['required', 'integer'],
+        ]);
+
+        try{
+            $product = Product::find($request->product_id);
+            $product->delete();
+            return redirect()->back()->with('success', 'successfully deleted product');
         }catch(Exception $e)
         {
             return redirect()->back()->with('error', 'ERROR: '.$e->getMessage());

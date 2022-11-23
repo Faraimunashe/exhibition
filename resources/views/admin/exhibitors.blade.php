@@ -40,9 +40,6 @@
                                     <div class="col-md-10">
                                         <h5 class="card-title">Exhibitors</h5>
                                     </div>
-                                    <div class="col-md-2 mt-3 justify-end">
-                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#largeModal">Add New</button>
-                                    </div>
                                 </div>
                                 <table class="table table-borderless datatable">
                                     <thead>
@@ -51,7 +48,7 @@
                                             <th scope="col">Name</th>
                                             <th scope="col">Phone</th>
                                             <th scope="col">Address</th>
-                                            <th scope="col">Account ID</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col">Option</th>
                                         </tr>
                                     </thead>
@@ -64,6 +61,7 @@
                                                 <th scope="row">
                                                     <a href="#">
                                                         @php
+                                                            $status = get_status($item->status);
                                                             $count++;
                                                             echo $count;
                                                         @endphp
@@ -72,10 +70,11 @@
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->phone }}</td>
                                                 <td>{{ $item->address }}</td>
-                                                <td>{{ $item->user_id }}</td>
+                                                <td>
+                                                    <span class="badge bg-{{$status->badge}}">{{$status->label}}</span>
+                                                </td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $item->id }}">Change</button>
-                                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#smallModal{{ $item->id }}">Remove</button>
                                                 </td>
                                             </tr>
                                             {{-- <div class="modal fade" id="smallModal{{ $item->id }}" tabindex="-1">
@@ -98,22 +97,27 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1">
                                                 <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
-                                                        <form method="POST" action="{{ route('admin-edit-item') }}">
+                                                        <form method="POST" action="{{ route('admin-update-exhibitor') }}">
                                                             @csrf
-                                                            <input type="hidden" name="item_id" value="{{ $item->id }}" required>
+                                                            <input type="hidden" name="exhibition_id" value="{{ $item->id }}" required>
+                                                            <input type="hidden" name="user_id" value="{{ $item->user_id }}" required>
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title">Edit item</h5>
+                                                                <h5 class="modal-title">Reply Exhibition Request</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row mb-3">
-                                                                    <label for="inputText" class="col-sm-2 col-form-label">item: </label>
+                                                                    <label for="inputText" class="col-sm-2 col-form-label">Select Response: </label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" name="name" class="form-control" value="{{ $item->name }}" required>
+                                                                        <select name="status" class="form-control" required>
+                                                                            <option selected disabled>Select Response</option>
+                                                                            <option value="0">Reject</option>
+                                                                            <option value="1">Accept</option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -124,7 +128,7 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                            </div> --}}
+                                            </div>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -134,52 +138,4 @@
             </div><!-- End Left side columns -->
         </div>
     </section>
-    <div class="modal fade" id="largeModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <form method="POST" action="{{ route('admin-add-exhibitor') }}">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add New Exhibitor</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row mb-3">
-                            <label for="inputText" class="col-sm-2 col-form-label">Select User</label>
-                            <div class="col-sm-10">
-                                <select name="user_id" class="form-control" required>
-                                    <option selected disabled>Selected Disabled</option>
-                                    @foreach (\App\Models\User::all() as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputText" class="col-sm-2 col-form-label">Name </label>
-                            <div class="col-sm-10">
-                                <input type="text" name="name" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputText" class="col-sm-2 col-form-label">Phone </label>
-                            <div class="col-sm-10">
-                                <input type="tel" name="phone" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputText" class="col-sm-2 col-form-label">Address </label>
-                            <div class="col-sm-10">
-                                <input type="text" name="address" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div><!-- End Large Modal-->
 </x-app-layout>

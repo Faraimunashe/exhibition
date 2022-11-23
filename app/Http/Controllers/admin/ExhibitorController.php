@@ -23,25 +23,21 @@ class ExhibitorController extends Controller
     {
         $request->validate([
             'user_id' => ['required', 'integer'],
-            'name' => ['required', 'string'],
-            'phone' => ['required', 'digits:10', 'starts_with:07'],
-            'address' => ['required', 'string']
+            'exhibition_id' => ['required', 'integer'],
+            'status' => ['required', 'integer']
         ]);
 
         try{
-            $user = Exhibitor::where('user_id', $request->user_id)->first();
-            if(!is_null($user))
+            $exh = Exhibitor::find($request->exhibition_id);
+            if(is_null($exh))
             {
-                return redirect()->back()->with('error', 'User already an exhibitor');
+                return redirect()->back()->with('error', 'User details not found');
             }
-            $exh = new Exhibitor();
-            $exh->user_id = $request->user_id;
-            $exh->name = $request->name;
-            $exh->phone = $request->phone;
-            $exh->address = $request->address;
+
+            $exh->status = $request->status;
             $exh->save();
 
-            DB::update('UPDATE role_user SET role_id = 2 WHERE user_id = ?', [Auth::id()]);
+            DB::update('UPDATE role_user SET role_id = 2 WHERE user_id = ?', [$request->user_id]);
 
             return redirect()->back()->with('success', 'Successfully added exhibitor');
         }catch(Exception $e)

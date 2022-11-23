@@ -17,7 +17,7 @@ class DashboardController extends Controller
             return redirect()->route('exhibitor-dashboard');
         }elseif(Auth::user()->hasRole('user'))
         {
-            return redirect()->route('user-home');
+            return redirect()->route('user-dashboard');
         }
     }
 }

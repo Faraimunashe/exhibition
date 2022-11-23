@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="pagetitle" style="padding-top: 25px;" id="space">
+    <div class="pagetitle" id="space">
         <h1>{{$exhibitor->name}}</h1>
         <nav>
             <ol class="breadcrumb">
