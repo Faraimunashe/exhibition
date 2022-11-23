@@ -21,9 +21,21 @@
                                 <button type="button" disabled class="btn btn-success mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
                                     Products <span class="badge bg-white text-primary">{{\App\Models\Product::where('exhibition_id', $ex->id)->count()}}</span>
                                 </button>
-                                <button type="button" class="btn btn-primary mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
-                                    Vote <span class="badge bg-white text-primary">0</span>
-                                </button>
+                                @if (hasVoted())
+                                    <button disabled type="button" class="btn btn-primary mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
+                                        Vote <span class="badge bg-white text-primary">{{\App\Models\Vote::where('exhibition_id', $ex->id)->count()}}</span>
+                                    </button>
+                                @else
+                                    @if (!isVoter())
+                                        <button disabled type="button" class="btn btn-primary mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
+                                            Vote <span class="badge bg-white text-primary">{{\App\Models\Vote::where('exhibition_id', $ex->id)->count()}}</span>
+                                        </button>
+                                    @else
+                                        <a href="{{route('user-vote', $ex->id)}}" class="btn btn-primary mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
+                                            Vote <span class="badge bg-white text-primary">{{\App\Models\Vote::where('exhibition_id', $ex->id)->count()}}</span>
+                                        </a>
+                                    @endif
+                                @endif
                                 <a href="{{route('user-products',$ex->id)}}" class="btn btn-dark mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
                                     See <i class="bi bi-eye"></i>
                                 </a>

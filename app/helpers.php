@@ -2,6 +2,9 @@
 
 use App\Models\Exhibitor;
 use App\Models\Membership;
+use App\Models\User;
+use App\Models\Vote;
+use App\Models\Voter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -31,3 +34,33 @@ function get_exhibitor(){
     return Exhibitor::where('user_id', Auth::id())->first();
 }
 
+function isVoter(){
+    $voter = Voter::where('user_id', Auth::id())->first();
+    if(is_null($voter)){
+        return false;
+    }else{
+        if($voter->status == 0 || $voter->status == 2){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+}
+
+function hasVoted(){
+    $voter = Vote::where('user_id', Auth::id())->first();
+    if(is_null($voter)){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+function get_exhibition($exh_id){
+    return Exhibitor::find($exh_id);
+}
+
+function get_user($user_id){
+    return User::find($user_id);
+}

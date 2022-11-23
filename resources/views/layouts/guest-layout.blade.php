@@ -17,6 +17,12 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{route('user-exhibit')}}">Exhibition</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('user-votes')}}">Votes</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('user-notices')}}">Notices</a>
+                    </li>
                 @endif
             </ul>
 

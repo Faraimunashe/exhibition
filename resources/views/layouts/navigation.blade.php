@@ -15,14 +15,26 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('admin-members')}}">
-                    <i class="bi bi-truck"></i>
+                    <i class="bi bi-people"></i>
                     <span>Members</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('admin-transactions')}}">
-                    <i class="bi bi-truck"></i>
+                    <i class="bi bi-coin"></i>
                     <span>Transactions</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('admin-notices')}}">
+                    <i class="bi bi-chat"></i>
+                    <span>Notices</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('admin-votes')}}">
+                    <i class="bi bi-chat"></i>
+                    <span>Votes</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -44,27 +56,7 @@
                     <span>Transactions</span>
                 </a>
             </li>
-        @elseif (Auth::user()->hasRole('user'))
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('user-payments') }}">
-                    <i class="bi bi-coin"></i>
-                    <span>Payments</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('user-transactions') }}">
-                    <i class="bi bi-coin"></i>
-                    <span>Transactions</span>
-                </a>
-            </li>
         @endif
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('profile') }}">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
-            </a>
-        </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
             <form id="logout-form" action="{{ route('logout') }}" method="POST">

@@ -34,6 +34,12 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin/users', 'App\Http\Controllers\admin\UserController@index')->name('admin-users');
 
     Route::get('/admin/transactions', 'App\Http\Controllers\admin\TransactionController@index')->name('admin-transactions');
+
+    Route::get('/admin/notices', 'App\Http\Controllers\admin\NoticeController@index')->name('admin-notices');
+    Route::post('/admin/add-notice', 'App\Http\Controllers\admin\NoticeController@add')->name('admin-add-notice');
+    Route::post('/admin/delete-notice', 'App\Http\Controllers\admin\NoticeController@delete')->name('admin-delete-notice');
+
+    Route::get('/admin/votes', 'App\Http\Controllers\admin\VoteController@index')->name('admin-votes');
 });
 
 
@@ -48,6 +54,8 @@ Route::group(['middleware' => ['auth', 'role:exhibitor']], function () {
     Route::post('/exhibitor/add-product-pic', 'App\Http\Controllers\exhibitor\ProductController@add_pic')->name('exhibitor-add-product-pic');
     Route::post('/exhibitor/update-product', 'App\Http\Controllers\exhibitor\ProductController@update')->name('exhibitor-update-product');
     Route::post('/exhibitor/delete-product', 'App\Http\Controllers\exhibitor\ProductController@delete')->name('exhibitor-delete-product');
+
+
 });
 
 Route::group(['middleware' => ['auth', 'role:user']], function () {
@@ -55,7 +63,14 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     Route::get('/products/{id}', 'App\Http\Controllers\user\DashboardController@products')->name('user-products');
 
     Route::get('/exhibit', 'App\Http\Controllers\user\ExhibitController@index')->name('user-exhibit');
+    Route::get('/adjudication', 'App\Http\Controllers\user\ExhibitController@adjudication')->name('user-adjudication');
     Route::post('/apply-exhibition', 'App\Http\Controllers\user\ExhibitController@apply')->name('user-apply-exhibit');
+
+    Route::get('/vote/{exhibition_id}', 'App\Http\Controllers\user\VoteController@vote')->name('user-vote');
+    Route::get('/votes', 'App\Http\Controllers\user\VoteController@index')->name('user-votes');
+
+    Route::get('/notices', 'App\Http\Controllers\user\NoticeController@index')->name('user-notices');
+
 
     Route::get('/membership', 'App\Http\Controllers\user\MembershipController@index')->name('user-membership');
     Route::post('/apply-membership', 'App\Http\Controllers\user\MembershipController@apply')->name('user-apply-membership');

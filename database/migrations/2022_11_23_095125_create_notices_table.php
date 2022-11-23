@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('votes', function (Blueprint $table) {
+        Schema::create('notices', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('exhibition_id');
-            $table->bigInteger('user_id');
+            $table->string('topic');
+            $table->text('content');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('votes');
+        Schema::dropIfExists('notices');
     }
 };

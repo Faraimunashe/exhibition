@@ -10,7 +10,7 @@
     </div>
     <section class="section dashboard" id="space">
         <div class="row">
-                <div class="col-lg-12">
+                <div class="col-md-9">
                     <div class="card">
                         <div class="card-header">
                             Application Form
@@ -56,11 +56,29 @@
                                     </div>
                                 </div>
                                 <div class="row mt-4">
-                                    <button class="btn btn-primary btn-block">
+                                    <button class="btn btn-primary">
                                         Apply Exhibition
                                     </button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Apply Adjudication
+                        </div>
+                        <div class="card-body">
+                            @if (is_null($adj))
+                                <a href="{{route('user-adjudication')}}" class="btn btn-success mt-3"> Appy Adjudication </a>
+                            @else
+                                @if ($adj->status == 2)
+                                    <div class="alert alert-warning mt-3">Pending Adjudication</div>
+                                @elseif ($adj->status == 1)
+                                    <div class="alert alert-success mt-3">Approved Adjudication</div>
+                                @endif
+                            @endif
                         </div>
                     </div>
                 </div>
