@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <div class="container-fluid">
         <!-- Navbar brand -->
-        <a class="navbar-brand" target="_blank" href="{{route('dashboard')}}">
+        <a class="navbar-brand" href="{{route('dashboard')}}">
             <strong style="color: rgb(5, 5, 67);">Gweru Exhibition</strong>
         </a>
         <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
@@ -12,7 +12,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 @if (Auth::user()->hasRole('user'))
                     <li class="nav-item active">
-                        <a class="nav-link" href="">Membership</a>
+                        <a class="nav-link" href="{{route('user-membership')}}">Membership</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{route('user-exhibit')}}">Exhibition</a>

@@ -57,5 +57,9 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     Route::get('/exhibit', 'App\Http\Controllers\user\ExhibitController@index')->name('user-exhibit');
     Route::post('/apply-exhibition', 'App\Http\Controllers\user\ExhibitController@apply')->name('user-apply-exhibit');
 
+    Route::get('/membership', 'App\Http\Controllers\user\MembershipController@index')->name('user-membership');
+    Route::post('/apply-membership', 'App\Http\Controllers\user\MembershipController@apply')->name('user-apply-membership');
+    Route::post('/subscribe-membership', 'App\Http\Controllers\user\MembershipController@subscribe')->name('user-subscribe-membership');
+
 });
 require __DIR__.'/auth.php';

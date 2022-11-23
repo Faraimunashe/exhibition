@@ -93,8 +93,8 @@ class ProductController extends Controller
         ]);
 
         try{
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
+            $imageName = time().'.'.$request->file->extension();
+            $request->file->move(public_path('images'), $imageName);
 
             $img = new ProductImage();
             $img->product_id = $request->product_id;

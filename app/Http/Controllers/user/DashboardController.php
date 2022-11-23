@@ -17,10 +17,10 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function products($exhibitor_id)
+    public function products($exhibition_id)
     {
-        $products = Product::where('exhibitor_id', $exhibitor_id)->get();
-        $exhibitor = Exhibitor::find($exhibitor_id);
+        $products = Product::where('exhibition_id', $exhibition_id)->latest()->paginate(10);
+        $exhibitor = Exhibitor::find($exhibition_id);
 
         return view('user.products', [
             'products' => $products,

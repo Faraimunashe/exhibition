@@ -1,10 +1,10 @@
 <x-guest-layout>
-    <div class="pagetitle" style="padding-top: 25px;" id="space">
+    <div class="pagetitle" style="" id="space">
         <h1>Home</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active">Overview</li>
+                <li class="breadcrumb-item active">Exhibitors</li>
             </ol>
         </nav>
     </div>
@@ -17,12 +17,17 @@
                             <h5 class="card-title">{{$ex->name}}</h5>
                             <p> <strong>Phone: </strong>{{$ex->phone}}. <strong>Address: </strong>{{$ex->address}}.</p>
 
-                            <button type="button" class="btn btn-primary mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
-                                Vote <span class="badge bg-white text-primary">0</span>
-                            </button>
-                            <a href="{{route('user-products',$ex->id)}}" class="btn btn-dark mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
-                                See <i class="bi bi-eye"></i>
-                            </a>
+                            <div style="float: right;">
+                                <button type="button" disabled class="btn btn-success mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
+                                    Products <span class="badge bg-white text-primary">{{\App\Models\Product::where('exhibition_id', $ex->id)->count()}}</span>
+                                </button>
+                                <button type="button" class="btn btn-primary mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
+                                    Vote <span class="badge bg-white text-primary">0</span>
+                                </button>
+                                <a href="{{route('user-products',$ex->id)}}" class="btn btn-dark mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
+                                    See <i class="bi bi-eye"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
