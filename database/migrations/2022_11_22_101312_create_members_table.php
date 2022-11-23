@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('sex');
             $table->string('phone');
             $table->string('address');
+            $table->boolean('paid')->default(false);
             $table->integer('status')->default(2);
             $table->timestamps();
         });

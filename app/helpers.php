@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Exhibitor;
+use App\Models\Membership;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -29,3 +30,4 @@ function get_status($num){
 function get_exhibitor(){
     return Exhibitor::where('user_id', Auth::id())->first();
 }
+

@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 
     Route::get('/membership', 'App\Http\Controllers\user\MembershipController@index')->name('user-membership');
     Route::post('/apply-membership', 'App\Http\Controllers\user\MembershipController@apply')->name('user-apply-membership');
+    Route::post('/apply-fee', 'App\Http\Controllers\user\MembershipController@apply_fee')->name('user-apply-fee');
     Route::post('/subscribe-membership', 'App\Http\Controllers\user\MembershipController@subscribe')->name('user-subscribe-membership');
 
 });
