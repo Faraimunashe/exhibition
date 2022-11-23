@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/admin/delete-notice', 'App\Http\Controllers\admin\NoticeController@delete')->name('admin-delete-notice');
 
     Route::get('/admin/votes', 'App\Http\Controllers\admin\VoteController@index')->name('admin-votes');
+    Route::post('/admin/add-voter', 'App\Http\Controllers\admin\DashboardController@add_voter')->name('admin-add-voter');
 });
 
 
