@@ -21,12 +21,12 @@
                                 <button type="button" disabled class="btn btn-success mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
                                     Products <span class="badge bg-white text-primary">{{\App\Models\Product::where('exhibition_id', $ex->id)->count()}}</span>
                                 </button>
-                                @if (hasVoted())
+                                @if (isVoter())
                                     <button disabled type="button" class="btn btn-primary mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
                                         Vote <span class="badge bg-white text-primary">{{\App\Models\Vote::where('exhibition_id', $ex->id)->count()}}</span>
                                     </button>
                                 @else
-                                    @if (!isVoter())
+                                    @if (hasVoted())
                                         <button disabled type="button" class="btn btn-primary mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Votes for this exhibitor">
                                             Vote <span class="badge bg-white text-primary">{{\App\Models\Vote::where('exhibition_id', $ex->id)->count()}}</span>
                                         </button>
