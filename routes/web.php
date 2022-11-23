@@ -21,6 +21,8 @@ Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->middlewa
 Route::get('/profile/change-password', 'App\Http\Controllers\ProfileController@change')->middleware(['auth'])->name('change-password');
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->middleware(['auth'])->name('dashboard');
+Route::get('/report', 'App\Http\Controllers\admin\ReportController@index')->middleware(['auth'])->name('report');
+
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin/dashboard', 'App\Http\Controllers\admin\DashboardController@index')->name('admin-dashboard');

@@ -43,6 +43,12 @@
                     <span>Users</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('report') }}">
+                    <i class="bi bi-file-arrow-down"></i>
+                    <span>Report</span>
+                </a>
+            </li>
         @elseif (Auth::user()->hasRole('exhibitor'))
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('exhibitor-products') }}">

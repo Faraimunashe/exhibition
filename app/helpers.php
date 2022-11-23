@@ -64,3 +64,7 @@ function get_exhibition($exh_id){
 function get_user($user_id){
     return User::find($user_id);
 }
+
+function get_exhibitor_id($exhibition_id){
+    return Exhibitor::find($exhibition_id);
+}
