@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/admin/update-exhibitor', 'App\Http\Controllers\admin\ExhibitorController@add')->name('admin-update-exhibitor');
 
     Route::get('/admin/members', 'App\Http\Controllers\admin\MemberController@index')->name('admin-members');
-    Route::get('/admin/update-member', 'App\Http\Controllers\admin\MemberController@update')->name('admin-update-member');
+    Route::post('/admin/update-member', 'App\Http\Controllers\admin\MemberController@update')->name('admin-update-member');
 
     Route::get('/admin/users', 'App\Http\Controllers\admin\UserController@index')->name('admin-users');
 
