@@ -53,10 +53,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @php
-                                            $count = 0;
-                                        @endphp
                                         @foreach ($transactions as $item)
+                                            @php
+                                                $status = get_status($item->status);
+                                            @endphp
                                             <tr>
                                                 <th scope="row">
                                                     {{$item->reference}}
@@ -64,7 +64,7 @@
                                                 <td>{{ $item->action }}</td>
                                                 <td>{{ $item->method}}</td>
                                                 <td>${{ $item->amount}}</td>
-                                                <td>{{ $item->status }}</td>
+                                                <td><span class="badge bg-{{$status->badge}}">{{$status->label}}</span></td>
                                                 <td>{{ $item->created_at }}</td>
                                             </tr>
                                         @endforeach

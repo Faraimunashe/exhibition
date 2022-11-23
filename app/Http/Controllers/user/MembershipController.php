@@ -128,9 +128,10 @@ class MembershipController extends Controller
                     $trans->save();
 
                     $member->paid = true;
+                    $member->status = 1;
                     $member->save();
 
-                    return redirect()->back()->with('success', 'Succesfully paid license fee');
+                    return redirect()->back()->with('success', 'Succesfully paid membership fee');
                 }
 
 

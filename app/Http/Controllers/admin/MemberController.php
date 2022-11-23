@@ -27,8 +27,8 @@ class MemberController extends Controller
         try{
             $member = Member::where('user_id', $request->user_id)->first();
             if($request->status === 0){
-                $member->status = 0;
-                $member->save();
+
+                $member->delete();
                 return redirect()->back()->with('success', 'successfully rejected user membership');
             }elseif($request->status === 1)
             {

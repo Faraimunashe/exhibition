@@ -62,6 +62,7 @@
                                                 <th scope="row">
                                                     <a href="#">
                                                         @php
+                                                            $status = get_status($item->status);
                                                             $count++;
                                                             echo $count;
                                                         @endphp
@@ -71,7 +72,9 @@
                                                 <td>{{ $item->sex}}</td>
                                                 <td>{{ $item->phone}}</td>
                                                 <td>{{ $item->address }}</td>
-                                                <td>{{ $item->status }}</td>
+                                                <td>
+                                                    <span class="badge bg-{{$status->badge}}">{{$status->label}}</span>
+                                                </td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $item->id }}">Change</button>
                                                 </td>

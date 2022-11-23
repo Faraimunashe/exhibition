@@ -13,7 +13,7 @@ function get_user_role($id){
 
 function get_status($num){
     $status = new stdClass();
-    if($num === 0){
+    if($num === 2){
         $status->label = "pending";
         $status->badge = "warning";
     }elseif($num === 1){
